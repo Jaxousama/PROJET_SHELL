@@ -32,7 +32,6 @@ int main()
 
 		if (l->in) printf("in: %s\n", l->in);
 		if (l->out) printf("out: %s\n", l->out);
-
 		/* Display each command of the pipe */
 		for (i=0; l->seq[i]!=0; i++) {
 			char **cmd = l->seq[i];
@@ -44,7 +43,12 @@ int main()
 					command_quit();
 				}
 			}
-			command_general(cmd);
+			if (l->out || l->in){
+				command_redirection(l->out,l->in,cmd);
+			}
+			else{
+				command_general(cmd);
+			}
 			printf("\n");
 		}
 	
