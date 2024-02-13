@@ -4,9 +4,10 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "readcmd.h"
 #include "csapp.h"
-
+#include "command.h"
 
 int main()
 {
@@ -38,6 +39,10 @@ int main()
 			printf("seq[%d]: ", i);
 			for (j=0; cmd[j]!=0; j++) {
 				printf("%s ", cmd[j]);
+				if(!(strcmp(cmd[j],"quit"))){
+					printf("\n");
+					command_quit();
+				}
 			}
 			printf("\n");
 		}
