@@ -14,8 +14,9 @@ int main()
 	while (1) {
 		struct cmdline *l;
 		int i, j;
-
-		printf("shell> ");
+		char* pwd=getenv("PWD");
+		char* user=getenv("USER");
+		printf("%s:%s> ",user,pwd);
 		l = readcmd();
 
 		/* If input stream closed, normal termination */

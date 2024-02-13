@@ -1,4 +1,7 @@
 #
 # test02.txt - Exécuter une commande sans argument
 #
-ls > heho
+ls
+ls
+ls
+quit
