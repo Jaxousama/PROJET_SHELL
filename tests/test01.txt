@@ -2,4 +2,3 @@
 # test01.txt - Tester la commande quit
 #
 quit
-WAIT

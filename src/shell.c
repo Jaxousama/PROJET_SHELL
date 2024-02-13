@@ -44,7 +44,9 @@ int main()
 					command_quit();
 				}
 			}
+			command_general(cmd);
 			printf("\n");
 		}
+	
 	}
 }

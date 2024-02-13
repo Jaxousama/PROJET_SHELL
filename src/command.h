@@ -3,4 +3,6 @@
 
 void command_quit();
 
+int command_general(char** cmd);
+
 #endif 
