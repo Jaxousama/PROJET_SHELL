@@ -59,9 +59,10 @@ int main()
 			command_redirection(l->out,l->in,cmd,i,flag_dernier);
 			printf("\n");
 		}
-		while((pid = waitpid(-1,NULL,WNOHANG))>0){
-        	printf("Terminer Fils : %d\n",pid);
-    	}
-		fflush(stdout);
+		while((pid = waitpid(-1,NULL,0))>0){}
+
+		if(flag_pipe == 1){
+			execl("/bin/rm","rm","pipe*",NULL);
+		}
 	}
 }
