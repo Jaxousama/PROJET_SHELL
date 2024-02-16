@@ -3,7 +3,7 @@
 
 void command_quit();
 
-int command_general(char** cmd);
+//int command_general(char** cmd,int n);
 
 int command_redirection(char* out,char* in,char** cmd);
 

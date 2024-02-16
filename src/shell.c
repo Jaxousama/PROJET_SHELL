@@ -9,16 +9,19 @@
 #include "csapp.h"
 #include "command.h"
 
+#define TAILLE_MAX 50
+
 int main()
 {
 	while (1) {
 		struct cmdline *l;
-		int i, j;
+		int i, j,perr;
+		char* pipe_name=malloc(sizeof(char)*TAILLE_MAX);
+		char* pipe_num=malloc(sizeof(char)*TAILLE_MAX);
 		char* pwd=getenv("PWD");
 		char* user=getenv("USER");
 		printf("%s:%s> ",user,pwd);
-		l = readcmd();
-
+		l = readcmd(); 
 		/* If input stream closed, normal termination */
 		if (!l) {
 			printf("exit\n");
@@ -31,25 +34,24 @@ int main()
 			continue;
 		}
 
-		if (l->in) printf("in: %s\n", l->in);
-		if (l->out) printf("out: %s\n", l->out);
 		/* Display each command of the pipe */
 		for (i=0; l->seq[i]!=0; i++) {
+			pipe_name="pipe";
+
+			sprintf(pipe_num,"%d",i);
+			
+			strcat(pipe_name,pipe_num);
+			perr=mkfifo(pipe_name,0644);
+			if(perr<0){
+				printf("error pipe");
+				exit(0);
+			}
 			char **cmd = l->seq[i];
 			printf("seq[%d]: ", i);
 			for (j=0; cmd[j]!=0; j++) {
 				printf("%s ", cmd[j]);
-				if(!(strcmp(cmd[j],"quit"))){
-					printf("\n");
-					command_quit();
-				}
 			}
-			if (l->out || l->in){
-				command_redirection(l->out,l->in,cmd);
-			}
-			else{
-				command_general(cmd);
-			}
+			command_redirection(l->out,l->in,cmd);
 			printf("\n");
 		}
 	

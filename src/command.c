@@ -8,9 +8,16 @@ void command_quit(){
     exit(1);
 }
 
+/*
 int command_general(char** cmd){
     pid_t pid;
-    int err;
+    int err,i;
+    for (i=0; cmd[i]!=0; i++) {
+		if(!(strcmp(cmd[i],"quit"))){
+		printf("\n");
+		command_quit();
+	    }
+    }
     pid=Fork();
     if(pid==-1){
         printf("error : Fork Issue \n");
@@ -29,10 +36,16 @@ int command_general(char** cmd){
     }
     return 0;
 }
-
+*/
 int command_redirection(char* out,char* in,char** cmd){
     pid_t pid;
-    int err;
+    int err,i;
+    for (i=0; cmd[i]!=0; i++) {
+		if(!(strcmp(cmd[i],"quit"))){
+		printf("\n");
+		command_quit();
+	    }
+    }
     pid=Fork();
     if(pid==-1){
         printf("error : Fork Issue \n");
@@ -41,7 +54,7 @@ int command_redirection(char* out,char* in,char** cmd){
     if(pid==0){ // Daughter
         if(out){
             int fd_out;
-            fd_out=open(out, O_CREAT | O_WRONLY, 0644);
+            fd_out=open(out, O_CREAT | O_WRONLY | O_TRUNC , 0644);
             if(fd_out < 0){
                 printf("%s : Permission denied \n",out);
                 exit(1);
