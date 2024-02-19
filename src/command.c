@@ -63,7 +63,6 @@ int command_redirection(char* out,char* in,char** cmd,int nombre_cmd,int flag_de
             }
             dup2(fd_in,0);
         }
-        
         err = execvp(cmd[0],cmd);
         if(err<0){
             printf("%s : command not found \n",cmd[0]);

@@ -30,7 +30,7 @@ int main()
 
 		if (l->err) {
 			/* Syntax error, read another command */
-			printf("error: %s\n", l->err);
+			printf("errorrrrr: %s\n", l->err);
 			continue;
 		}
 
@@ -60,9 +60,5 @@ int main()
 			printf("\n");
 		}
 		while((pid = waitpid(-1,NULL,0))>0){}
-
-		if(flag_pipe == 1){
-			execl("/bin/rm","rm","pipe*",NULL);
-		}
 	}
 }
