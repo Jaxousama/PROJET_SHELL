@@ -57,12 +57,14 @@ int main()
 			char **cmd = l->seq[i];
 			//printf("seq[%d]: ", i);
 			fflush(stdout);
-			command_redirection(l->out,l->in,cmd,i,flag_dernier);
+			command_redirection(l->out,l->in,cmd,i,flag_dernier,l->back);
 			//printf("\n");
 		}
+		
 		if(!(l->back)){
-			//while((pid = waitpid(-1,NULL,0))>0){}
+			while(waitpid(0,NULL,0)>0){};
 		}
 		
 	}
 }
+

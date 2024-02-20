@@ -10,9 +10,9 @@ void command_quit(){
 }
 
 
-int command_redirection(char* out,char* in,char** cmd,int nombre_cmd,int flag_dernier){
+int command_redirection(char* out,char* in,char** cmd,int nombre_cmd,int flag_dernier,int flag_background){
     pid_t pid;
-    int err,i,fd_in,fd_out;
+    int err,i,fd_in,fd_out,errset;
     int fd_pipeout,fd_pipein;
     char pipe_name[TAILLE_MAX];
     char pipe_num[TAILLE_MAX];
@@ -84,6 +84,12 @@ int command_redirection(char* out,char* in,char** cmd,int nombre_cmd,int flag_de
     }
 
     else{ //Mommy
+        if(flag_background){
+            errset=setpgid(pid,0);
+            if(errset<0){
+                printf("error : setpgid");
+            }
+        }
         return 0;
     }
     return 0;

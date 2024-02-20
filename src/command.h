@@ -5,6 +5,6 @@
 
 void command_quit();
 
-int command_redirection(char* out,char* in,char** cmd,int nombre_cmd,int flag);
+int command_redirection(char* out,char* in,char** cmd,int nombre_cmd,int flag,int flag_background);
 
 #endif 
