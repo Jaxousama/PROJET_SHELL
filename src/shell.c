@@ -15,13 +15,14 @@ int main()
 {
 	while (1) {
 		struct cmdline *l;
-		int i, j,perr,flag_dernier,flag_pipe,pid;
+		int i, j,perr,flag_dernier,pid;
 		char pipe_name[TAILLE_MAX];
 		char pipe_num[TAILLE_MAX];
 		char* pwd=getenv("PWD");
 		char* user=getenv("USER");
 		printf("%s:%s> ",user,pwd);
 		l = readcmd(); 
+		mkdir("Pipe",0755);
 		/* If input stream closed, normal termination */
 		if (!l) {
 			printf("exit\n");
@@ -30,23 +31,21 @@ int main()
 
 		if (l->err) {
 			/* Syntax error, read another command */
-			printf("errorrrrr: %s\n", l->err);
+			printf("error: %s\n", l->err);
 			continue;
 		}
-
 		/* Display each command of the pipe */
 		for (i=0; l->seq[i]!=0; i++) {
-			strcpy(pipe_name,"pipe");
+			strcpy(pipe_name,"Pipe/pipe");
 			sprintf(pipe_num,"%d",i);
 			strcat(pipe_name,pipe_num);
 			if(l->seq[i+1]!=0){
 				perr=mkfifo(pipe_name,0644);
-				if(perr<0){
-					printf("error pipe");
+				if(perr<0 && errno!=EEXIST){
+					printf("error : Pipe Issue\n");
 					exit(0);
 				}
 				flag_dernier=0;
-				flag_pipe=1;
 			}
 			else{
 				flag_dernier = 1;

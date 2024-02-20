@@ -6,7 +6,7 @@
 
 
 void command_quit(){
-    exit(1);
+    execl("/bin/rm","rm","-r","Pipe",NULL);
 }
 
 
@@ -16,7 +16,7 @@ int command_redirection(char* out,char* in,char** cmd,int nombre_cmd,int flag_de
     int fd_pipeout,fd_pipein;
     char pipe_name[TAILLE_MAX];
     char pipe_num[TAILLE_MAX];
-    strcpy(pipe_name,"pipe");
+    strcpy(pipe_name,"Pipe/pipe");
 	sprintf(pipe_num,"%d",nombre_cmd);
 	strcat(pipe_name,pipe_num);
     for (i=0; cmd[i]!=0; i++) {
@@ -40,7 +40,7 @@ int command_redirection(char* out,char* in,char** cmd,int nombre_cmd,int flag_de
                 fd_pipeout=open(pipe_name,O_WRONLY, 0644);
                 dup2(fd_pipeout,1);
             }
-            strcpy(pipe_name,"pipe");
+            strcpy(pipe_name,"Pipe/pipe");
             sprintf(pipe_num,"%d",nombre_cmd-1);
             strcat(pipe_name,pipe_num);
             fd_pipein=open(pipe_name,O_RDONLY, 0644);
