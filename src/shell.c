@@ -9,10 +9,13 @@
 #include "csapp.h"
 #include "command.h"
 
-
+void terminaison(int sig){
+	waitpid(-1, NULL, WNOHANG|WUNTRACED);
+}
 
 int main()
 {
+	Signal(SIGCHLD, terminaison);
 	while (1) {
 		struct cmdline *l;
 		int i, j,perr,flag_dernier,pid;
@@ -20,7 +23,7 @@ int main()
 		char pipe_num[TAILLE_MAX];
 		char* pwd=getenv("PWD");
 		char* user=getenv("USER");
-		printf("%s:%s> ",user,pwd);
+		printf("%s:%s>",user,pwd);
 		l = readcmd(); 
 		mkdir("Pipe",0755);
 		/* If input stream closed, normal termination */
@@ -34,6 +37,7 @@ int main()
 			printf("error: %s\n", l->err);
 			continue;
 		}
+		
 		/* Display each command of the pipe */
 		for (i=0; l->seq[i]!=0; i++) {
 			strcpy(pipe_name,"Pipe/pipe");
@@ -51,13 +55,14 @@ int main()
 				flag_dernier = 1;
 			}
 			char **cmd = l->seq[i];
-			printf("seq[%d]: ", i);
-			for (j=0; cmd[j]!=0; j++) {
-				printf("%s ", cmd[j]);
-			}
+			//printf("seq[%d]: ", i);
+			fflush(stdout);
 			command_redirection(l->out,l->in,cmd,i,flag_dernier);
-			printf("\n");
+			//printf("\n");
 		}
-		while((pid = waitpid(-1,NULL,0))>0){}
+		if(!(l->back)){
+			//while((pid = waitpid(-1,NULL,0))>0){}
+		}
+		
 	}
 }
