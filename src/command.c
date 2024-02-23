@@ -9,6 +9,9 @@ void command_quit(){
     execl("/bin/rm","rm","-r","Pipe",NULL);
 }
 
+void Interrup(int sig){
+	exit(0);
+}
 
 int command_redirection(char* out,char* in,char** cmd,int nombre_cmd,int flag_dernier,int flag_background){
     pid_t pid;
@@ -31,6 +34,7 @@ int command_redirection(char* out,char* in,char** cmd,int nombre_cmd,int flag_de
         exit(1);
     }
     if(pid==0){ // Daughter
+        Signal(SIGINT, Interrup);
         if((!flag_dernier) && (nombre_cmd==0)){
             fd_pipeout=open(pipe_name,O_WRONLY, 0644);
             dup2(fd_pipeout,1);

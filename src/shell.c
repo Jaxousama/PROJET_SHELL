@@ -13,8 +13,13 @@ void terminaison(int sig){
 	waitpid(-1, NULL, WNOHANG|WUNTRACED);
 }
 
+void ignorer(int sig){
+	printf("\n");
+}
+
 int main()
 {
+	signal(SIGINT, ignorer);
 	Signal(SIGCHLD, terminaison);
 	while (1) {
 		struct cmdline *l;
