@@ -1,0 +1,4 @@
+#
+# test_redirection3.txt - Tester une redirection d'entrée et de sortie 
+#
+wc -l < tests/test01.txt > tests/tmp

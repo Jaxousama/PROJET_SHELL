@@ -1,0 +1,4 @@
+#
+# test_redirection1.txt - Tester une redirection de sortie
+#
+ls -a > tests/tmp

@@ -1,0 +1,4 @@
+#
+# test_tubes2.txt - Tester une succession de tubes
+#
+echo "HIIIIIIII" | tr I o

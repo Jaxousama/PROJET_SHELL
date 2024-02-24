@@ -1,0 +1,4 @@
+#
+# test_tubes1.txt - Tester une succession de tubes
+#
+ls | grep a | grep a | grep a | grep a | grep a | grep a | grep a | grep a | grep a | grep a | grep a | grep a

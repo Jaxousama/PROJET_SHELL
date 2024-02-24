@@ -1,0 +1,4 @@
+#
+# test_cmd1.txt - test des commandes simples
+#
+echo *^__^*

@@ -1,0 +1,4 @@
+#
+# test_tubes3.txt - Tester une succession de tubes
+#
+ls -l | grep c | wc -w

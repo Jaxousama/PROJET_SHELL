@@ -1,0 +1,4 @@
+#
+# test_redirection1.txt - Tester une redirection de d'entrée
+#
+wc < tests/tmp

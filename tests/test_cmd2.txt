@@ -1,0 +1,4 @@
+#
+# test_cmd2.txt - test des commandes simples
+#
+cat tests/test_cmd2.txt
